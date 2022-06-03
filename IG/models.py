@@ -92,3 +92,20 @@ class Comments(models.Model):
      # delete comments from database
     def delete_comments(self):
         self.delete()
+
+class Likes(models.Model):
+    image = models.ForeignKey(Image,related_name='like_count', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.image
+    def save_likes(self):
+        self.save()
+
+    # update like
+    def update_likes(self, name):
+        self.name = name
+        self.save()
+
+     # delete like from database
+    def delete_likes(self):
+        self.delete()
