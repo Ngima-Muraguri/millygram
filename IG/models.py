@@ -72,3 +72,23 @@ class Profile(models.Model):
     def search_profiles(cls, search_term):
         profiles = cls.objects.filter(user__username__icontains=search_term).all()
         return profiles
+
+class Comments(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    image = models.ForeignKey(Image, on_delete=models.CASCADE)
+    comment_date = models.DateTimeField(auto_now_add=True)
+    content=models.TextField(null=True)
+    
+    def __str__(self):
+        return self.image
+    def save_comments(self):
+        self.save()
+
+    # update comments
+    def update_comments(self, name):
+        self.name = name
+        self.save()
+
+     # delete comments from database
+    def delete_comments(self):
+        self.delete()
