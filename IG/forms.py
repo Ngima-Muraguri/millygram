@@ -1,24 +1,19 @@
-from django import forms
-from django.db import models
-import datetime as dt
 from django.contrib.auth.models import User
-from django.forms import ModelForm, widgets
 from django import forms
-from django.db.models.signals import post_save
-from .models import Image, Profile, Comments
+from .models import Comments, Comments, Image, Profile
 
-class AddImageForm(ModelForm):
+class PostForm(forms.ModelForm):
     class Meta:
         model = Image
-        fields = ['image','caption','name']
-class UpdateProfileForm(ModelForm):
+        exclude = ['likes', 'comments','profile', 'post_date']
+
+
+class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['bio','profile_photo']
-class CommentForm(ModelForm):
+        exclude = ['posts', 'followers', 'following', 'user']
+        
+class CommentForm(forms.ModelForm):
     class Meta:
-        model=Comments
-        fields=['content']
-        widgets= {
-            'content':forms.Textarea(attrs={'rows':2,})
-        }
+        model = Comments
+        exclude = ['user']

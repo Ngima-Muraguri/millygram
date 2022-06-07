@@ -10,7 +10,9 @@ urlpatterns=[
  path('user/add/image', views.add_image, name='addimage'),
  path('user/update/profile', views.update_profile, name='updateprofile'),
  path('post/<image_id>',views.single_image,name='singleimage'),
- path('post/<image_id>/like',views.like_image,name='likeimage')
+ path('post/<image_id>/like',views.like_image,name='likeimage'),
+ path("register", views.register_request, name="register"),
+ path("login", views.login_request, name="login")
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

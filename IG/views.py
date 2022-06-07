@@ -7,15 +7,58 @@ from .models import Image,Profile,Likes,Comments
 from django.http  import HttpResponse,Http404
 from django.contrib import messages
 from .forms import *
+from django.contrib.auth import login, authenticate
+from .forms import NewUserForm
+from django.contrib.auth.forms import AuthenticationForm 
 
 
 # Create your views here.
-@login_required(login_url='/accounts/login/')
+# @login_required(login_url='accounts/login/')
 def home(request):
     images=Image.objects.all()
-    
-   
+
     return render(request,'index.html',{'images':images})
+
+def register_request(request):
+	if request.method == "POST":
+		form = NewUserForm(request.POST)
+		if form.is_valid():
+			user = form.save()
+			login(request, user)
+			messages.success(request, "Registration successful." )
+			return redirect("main:homepage")
+		messages.error(request, "Unsuccessful registration. Invalid information.")
+	form = NewUserForm()
+	return render (request=request, template_name="/IG/registration/registration_form.html", context={"register_form":form})
+
+def login_request(request):
+	if request.method == "POST":
+		form = AuthenticationForm(request, data=request.POST)
+		if form.is_valid():
+			username = form.cleaned_data.get('username')
+			password = form.cleaned_data.get('password')
+			user = authenticate(username=username, password=password)
+			if user is not None:
+				login(request, user)
+				messages.info(request, f"You are now logged in as {username}.")
+				return redirect("main:homepage")
+			else:
+				messages.error(request,"Invalid username or password.")
+		else:
+			messages.error(request,"Invalid username or password.")
+	form = AuthenticationForm()
+	return render(request=request, template_name="/IG/registration/login.html", context={"login_form":form})
+
+# def login_user(request):
+
+#     if request.method == 'POST':
+#         email = request.POST.get('email')
+#         password = request.POST.get('password')
+
+#     return render(request, 'registration/login.html')
+
+
+
 def single_image(request,image_id):
     image=get_object_or_404(Image,id=image_id)
     comments=Comments.objects.filter(image=image).all()
@@ -48,14 +91,14 @@ def search_results(request):
   else:
     return render(request, 'search.html')
 
-@login_required(login_url='/accounts/login/')
+# @login_required(login_url='accounts/login/')
 def profile(request,user_id):
     current_user=get_object_or_404(User,id=user_id)
     # current_user = request.user
     images = Image.objects.filter(user=current_user)
     profile = get_object_or_404(Profile,id = current_user.id)
     return render(request, 'profile/profile.html', {"images": images, "profile": profile})
-@login_required(login_url='/accounts/login/')
+# @login_required(login_url='accounts/login/')
 def add_image(request):
     if request.method=='POST':
         current_user=request.user

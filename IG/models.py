@@ -2,7 +2,7 @@ from django.db import models
 from django import forms
 import datetime as dt
 from django.contrib.auth.models import User
-from django.forms import widgets
+from django.forms import ModelForm, widgets
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from cloudinary.models import CloudinaryField
@@ -110,3 +110,19 @@ class Likes(models.Model):
      # delete like from database
     def delete_likes(self):
         self.delete()
+
+class AddImageForm(ModelForm):
+    class Meta:
+        model = Image
+        fields = ['image','caption','name']
+class UpdateProfileForm(ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['bio','profile_photo']
+class CommentForm(ModelForm):
+    class Meta:
+        model=Comments
+        fields=['content']
+        widgets= {
+            'content':forms.Textarea(attrs={'rows':2,})
+        }

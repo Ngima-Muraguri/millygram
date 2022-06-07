@@ -1,57 +1,62 @@
 from django.test import TestCase
-from .models import Image,Profile,Likes,Comments
+from .models import Image, Profile, Comments
+
 from django.contrib.auth.models import User
 
+
 # Create your tests here.
-class ImageTestCase(TestCase):
-
+class TestImage(TestCase):
     def setUp(self):
-        """
-        Create a image for testing
-        """
-        self.user=User(username='Jojo',email='hhhhh2@gmail.com',password='1234')
-        self.image=Image(image='food.jpg',name='food',caption='pretty awesome',user=self.user)
-        self.comment=Comments(image=self.image,user=self.user,content='yeahh')
-        self.like=Likes(image=self.image,user=self.user)
-    def test_instance(self):
-        self.assertTrue(isinstance(self.user,User))
-        self.assertTrue(isinstance(self.image,Image))
-        self.assertTrue(isinstance(self.comment,Comments))
-        self.assertTrue(isinstance(self.like,Likes))
-    def test_save(self):
+        self.user = User(profile="Profile")
         self.user.save()
-        self.image.save_image()
-        self.comment.save_comments()
-        self.like.save_likes()
-        users = User.objects.all()
-        images = Image.objects.all()
-        comments = Comments.objects.all()
-        likes = Likes.objects.all()
-        self.assertTrue(len(images) > 0)
-        self.assertTrue(len(users) > 0)
-        self.assertTrue(len(comments) > 0)
-        self.assertTrue(len(likes) > 0)
-    def test_update(self):
-        self.user.save()
-        self.image.save_image()
-        self.image.update_caption('so pretty')
-        caption_update=self.image.caption
-        self.assertEqual(caption_update,'so pretty')
 
-    def test_delete(self):
+        self.new_image = Image(image="image", image_name="john", image_caption="Amazing", likes=1, comments="comment", profile=self.user)
+        self.new_image.save_image()
+
+    def test_instance(self):
+        self.assertTrue(isinstance(self.new_image,Image))
+
+    def tearDown(self):
+        Image.objects.all().delete()
+
+    def test_delete_image(self):
+        self.new_image.delete_image()
+        image = Image.objects.all()
+        self.assertEqual(len(image), 0)
+
+   
+
+
+class TestProfile(TestCase):
+    def setUp(self):
+        self.user = User(profile="Profile")
         self.user.save()
-        self.image.save_image()
-        self.comment.save_comments()
-        self.like.save_likes()
-        Likes.objects.get(id =self.like.id).delete()
-        Comments.objects.get(id =self.comment.id).delete()
-        Image.objects.get(id =self.image.id).delete()
-        User.objects.get(id =self.user.id).delete()
-        likes=Likes.objects.all()
-        comments=Comments.objects.all()
-        images=Image.objects.all()
-        users=User.objects.all()
-        self.assertTrue(len(images) == 0)
-        self.assertTrue(len(users) == 0)
-        self.assertTrue(len(comments) == 0)
-        self.assertTrue(len(likes) == 0)
+
+        self.new_profile = Profile(photo="image", name="john", bio="Amazing", posts=1, followers=1, following=1 ,user=self.user)
+        self.new_profile.save_profile()
+
+    def test_instance(self):
+        self.assertTrue(isinstance(self.new_profile, Profile))
+
+    def tearDown(self):
+        Profile.objects.all().delete()
+
+    def test_delete_profile(self):
+        self.new_profile.delete_profile()
+        profile = Profile.objects.all()
+        self.assertEqual(len(profile), 0)
+
+        
+class TestComments(TestCase):
+    def setUp(self):
+        self.user = User(profile="Profile")
+        self.user.save()
+
+        self.comment= Comments(comment="Comment", user=self.user)
+    def test_instance(self):
+        self.assertTrue(isinstance(self.comment,Comments))
+
+    def test_save_comment(self):
+        self.comment.save_comment()
+        comment= Comments.objects.all()
+        self.assertTrue(len(comment)>0)
