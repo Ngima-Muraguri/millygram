@@ -1,0 +1,117 @@
+{%extends "django_registration/base.html"%}
+{% load bootstrap_icons %}
+{% load static%}
+{% load bootstrap5 %}
+
+{% block styles %}
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/hom.css' %}">
+    <style>
+    @media screen and (min-width: 480px) and (max-width: 767px) {
+      .int{
+        margin: top 334px;
+      }
+      .card{
+        margin-left: 0px;
+      }
+      .cont .main{
+        width: 100px;
+      }
+      .img{
+        width: 100px;
+      }
+  }
+
+  </style>
+
+{% endblock %}
+
+{% block content %}
+<div class="container int" style="margin-top:123px;">
+  <!-- <h1>Hello {{ user }}, You have successfully logged in!</h1> -->
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-6">
+
+{%for img in image %}
+
+
+<!-- <div class="row">
+    {% autoescape on %}
+    {{article.post| safe}}
+   {% endautoescape %}
+</div> -->
+<div class="container cont" style="margin-left: 31px;">
+    <div class="card main my-4" style="width: 27rem; ">
+        <ul class="list-group list-group-flush">
+            {%for img in profile %}
+            
+             {%endfor %}
+            <li class="list-group-item">{{img.profile}}</li>
+            
+          </ul>
+        <a href="{% url 'image' img.id %}"><img src="{{img.image.url}}" class="card" id="img" alt="..." style="width:27rem ;"> </a>
+        <div class="card-body">
+            <a class='btn btn-default'href="javascript:void(0);" onclick="addLike();">{% bs_icon 'heart-fill' size='1.5em' color='orangered' %}</a>
+          <p class="count"> <b>0 likes</b> </p>
+          <p class="card-text">{{img.post_date}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          
+            <input type="text" id="comment-box" placeholder="Add comment">
+            <button id="post">Post</button>
+            <ul id="unordered">
+   
+            
+          </li>
+          
+          
+        
+      </div>
+</div>
+
+{% endfor %}
+    </div>
+    <div class="col-md-3" style="margin-left: 43px; margin-top: 43px;">
+      {% for prof in profile%}
+      <!-- <p>Profiles</p> -->
+      <!-- <button class="btn btn-primary">Follow</button> -->
+
+      <img src="https://media.istockphoto.com/vectors/avatar-5-vector-id1131164548?k=20&m=1131164548&s=612x612&w=0&h=ODVFrdVqpWMNA1_uAHX_WJu2Xj3HLikEnbof6M_lccA=" class="img-fluid img-thumbnail rounded-circle" style="width: 50px;" alt="Avatar" />
+      {{prof.user}} 
+      <a class="btn btn-primary ml-4">Follow</a>
+
+    </div>
+      {% endfor %}
+
+  </div>
+
+
+
+</div>
+
+{% block scripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        let numCount = 0 
+        let count = document.querySelector('.count')
+        function addLike () {
+        numCount ++
+        count.innerText = numCount
+}
+
+var post= document.getElementById("post");
+post.addEventListener("click", function(){
+    var commentBoxValue= document.getElementById("comment-box").value;
+ 
+    var li = document.createElement("li");
+    var text = document.createTextNode(commentBoxValue);
+    li.appendChild(text);
+    document.getElementById("unordered").appendChild(li);
+ 
+});
+      </script>
+    {% bootstrap_javascript %}
+    {% endblock  %}
+{% endblock content %}

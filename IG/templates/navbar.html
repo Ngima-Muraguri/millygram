@@ -1,61 +1,47 @@
-<nav class="navbar navbar-expand-md navbar ">
-    <div class="container">
-    <div style="margin-left: 5%;">
-    <a href="{% url 'home' %}" class="navbar-brand mr-3">
-      <img src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png" alt="">
-    </a>
-    </div>
-  
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation" style="margin-left: 65%;">
-    <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <div class="navbar-nav" style="margin-left: 30%;">
-      <form class="navbar-form" role="search" method="" action="{% url 'search_results' %}" style="margin-right:150px;" >
-        {% csrf_token %}
-        <div class="input-group">
-        <input type="text" class="form-control" placeholder="SearchByProfile" name="name">
-        <div class="input-group-btn">
-        <button class="btn btn-dark" style="margin-left: 5px;" type="submit">Search</button>
-        </div>
-        </div>
+{% load bootstrap_icons %}
+{% load bootstrap5 %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top navbar-expand">
+    <div class="container-fluid">
+      <a class="navbar-brand my-3" href="/" style="font-family: 'Inspiration', cursive;">InstagramClone</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <!-- <a class='btn btn-default'href="">{% bs_icon 'search' size='1.5em' color='orangered' %}</a> -->
+
+              <!-- <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a> -->
+              <a style ="color: black; font-weight: bold; text-decoration:none;" href="/admin" class="nav-item" active-color="black"><i class="fas fa-user-tie"></i>&nbsp;Admin Dashboard</a>
+
+            </li>
+        </ul>
+        {% if user.is_authenticated %}
+
+        <form class="navbar-form my-3" role="search" action="{% url 'search' %}">
+
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search e.g nature, food" name="image">
+            <div class="input-group-btn">
+              <button class="btn btn-default" type="submit">{% bs_icon 'search' size='1.5em' color='orangered' %}</button>            </div>
+          </div>
+
         </form>
-      
-    </div>
-  
-    <div class="collapse navbar-collapse" id="navbarToggle" style="margin-left: 2px;">
-     
-      <div class="navbar-nav mb-3 ">
-       
-  {% if user.is_authenticated %}
-    <ul>
-    <li class="dropdown"style="list-style: none";>
-    <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-user"aria-hidden="true"></i>
-    <span class="caret"></span>
-    </a>
-    <ul class="dropdown-menu" role="menu">
-    <li>
-    <a href="">Home</a>
-    </li>
-    <li>
-    <a href="accounts/password/change">Change Password</a>
-    </li>
-    <li>
-    <a href="/user/{{request.user.id}}">Profile</a>
-    </li>
-    <li>
-    <a href="/logout">Logout</a>
-    </li>
-    </ul>
-    </li>
-    </ul>
-  {% else %}
-    <li>
-    <a class='btn btn-default' href="accounts/login">Login</a>
-    </li>
-  {% endif %}
-        
+
+            <a class="btn btn-default" aria-current="page" href="{% url 'home' %}">{% bs_icon 'house-fill' size='1.5em' color='orangered' %}</a>
+            <a class='btn btn-default'href="{% url 'profile' %}">{% bs_icon 'person-fill' size='1.5em' color='orangered' %}</a>
+            <a class='btn btn-default'href="{%url 'post'%}">{% bs_icon 'cloud-upload-fill' size='1.5em' color='orangered' %}</a>
+
+            
+            <!-- <h4>Welcome {{ user }}</h4> -->
+            <a class='btn btn-default' href="/accounts/logout">Logout</a>
+        {% else %}
+        <span class="navbar-text">
+            <!-- <a class='btn btn-default' href="/accounts/login">Login</a>
+            <a class='btn btn-default' href="/accounts/register">Register</a> -->
+        </span>
+        {% endif %}
       </div>
     </div>
-  </div>
   </nav>

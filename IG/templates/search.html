@@ -1,47 +1,63 @@
-{%extends 'base.html'%}
+{%extends "django_registration/base.html"%}
+{% load bootstrap5 %}
+{% load static %}
+{% block styles %}
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <style>
+      small{
+
+       margin-left: 210px;
+       width: 52rem;
+      }
+
+       @media screen and (min-width: 480px) and (max-width: 767px) {
+       .small{
+           margin-left: 22px;
+           width: 122px;
+
+       }
+       img{
+           width: 100px;
+       }
+   }
+  </style>
+{% endblock %}
+
 {% block content %}
-<div class="container">
+<div class="container row text-center " style="margin-top:99px; ">
 
+  <div class="row">
+    {% if image%}
+      <h2>Found {{ image|length }} of searched term {{message}}</h2>
+    {% else %}
+      <h2> Found 0 images for the search term {{message}}</h2>
+    {% endif %}
 
-    <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4 search">
+  </div>
 
+  <div class="row">
 
-            {% if users %}
-            <h6 class="text-center text-monospace">
-                Profiles found
-            </h6>
-            {% for user in users %}
-            <div class="flex">
-                <div>
+  {% if image %}
+    {% for img in image %}
+    <div class="container row text-center  ">
+      
+      <div class="col-sm-3"></div>
+        <div class="container col-md-4 small bg-light mb-3" style="width: 54rem;">
+          
+        <h4 style="text-align:center; color:orangered";>IMAGE DETAILS</h4>
+        <img src="{{img.image.url}}" alt="" srcset="" style="width:22rem ; ">
+        <h4>Image Name: {{img.image_name}}</h4>
 
-                    <img src="{{user.user.profile.profile_photo.url}}" class="rounded-circle border" alt="img"
-                        width="150" height="300">
-                    <p><b>{{user.profile.first_name}}<br>
-                            {{user.profile.last_name}}<br></b></p>
-                    <p>{{user.profile.bio}}<br></p>
-
-                </div>
-                <div>
-                    <p class="ml-2"><span class="font-weight-bold">{{user.user.username}}</span></p>
-                </div>
-            </div>
-            {% endfor %}
-            {%else%}
-            <p> Profiles found</p>
-            {% endif %}
-
-            {% if images %}
-            <h6 class="text-center text-monospace">
-                posts found
-            </h6>
-
-            {% endif %}
-
-
+        <p>Caption: {{img.image_caption}}</p>
+        <h4>Posted by: {{img.profile}}</h4>
+        <h4>Post Date: {{img.post_date}}</h4>
+        <h4>Likes: {{img.likes}}</h4>
         </div>
-        <div class="col-md-4"></div>
-    </div>
+        <div class="col-sm-3"></div>
+  </div>
+    {% endfor %}
+  {% endif %}
+  </div>
 </div>
 {% endblock %}

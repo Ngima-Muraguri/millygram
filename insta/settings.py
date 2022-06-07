@@ -43,8 +43,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cloudinary',
-    'bootstrap4',
-    'crispy_forms',
+    'bootstrap5',
+    'fontawesome_5',
+    'django_bootstrap_icons',
+    'tinymce',
+    'emoji_picker',
     
 ]
 

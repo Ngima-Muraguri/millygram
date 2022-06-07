@@ -1,0 +1,29 @@
+{%extends "django_registration/base.html"%}
+{% load bootstrap5 %}
+{% load static %}
+
+{% block content%}
+
+{% block styles %}
+ {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}"> 
+{% endblock %}
+
+
+
+<div class="container post bg-light" style="margin-top: 123px;">
+    <h4 class="my-4">UPDATE PROFILE</h4>
+    <form  action="{%url 'editprofile'%}" method="post" enctype="multipart/form-data" class="m-4">
+        {%csrf_token%}
+      
+        {% bootstrap_form prof_form%}
+        <input type="submit" class="btn btn-primary btn-sm mb-4" value="Update Profile">
+      </form>
+</div>
+
+ {% block scripts %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+{% bootstrap_javascript %}
+{% endblock %}
+
+{% endblock %}

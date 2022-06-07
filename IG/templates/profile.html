@@ -1,0 +1,53 @@
+{%extends "django_registration/base.html"%}
+{% load bootstrap_icons %}
+{% load static%}
+{% load bootstrap5 %}
+
+{% block styles %}
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+<div style="margin-top: 122px;" class="container">
+    
+   <div class="container row" style="margin-left: 133px;">
+    {% for photo in profile %}
+       <div class="col-md-4">
+        
+        <img src="https://media.istockphoto.com/vectors/avatar-5-vector-id1131164548?k=20&m=1131164548&s=612x612&w=0&h=ODVFrdVqpWMNA1_uAHX_WJu2Xj3HLikEnbof6M_lccA=" class="img-fluid img-thumbnail rounded-circle" style="width: 150px;" alt="Avatar" />
+        
+        <!-- <img class="rounded-circle" alt="80x80" src="{{ photo.photo.url}}" data-holder-rendered="true" style="width: 150px;"> -->
+        <!-- {% bs_icon 'person-fill' size='' color='orangered' %} -->
+        
+       </div>
+       <div class="col-md-4">
+        <b>{{ photo.user }}</b>
+        <a href="{% url 'editprofile' %}"> <button class="button">Edit Profile</button> </a>
+        <a class='btn btn-default'href="">{% bs_icon 'gear' size='1.5em' color='black' %}</a>
+
+        <div class="my-4">
+            <strong>
+               <span> {{photo.posts}} Posts</span>
+                <span class="photo">{{photo.followers}} Followers</span>
+                {{photo.following}} Following
+            </strong>
+        </div>
+        <b>{{photo.name}}</b>
+        
+       </div>
+       {% endfor %}
+   </div>
+   <hr>
+   <div class="container">
+    {% for img in image %}
+        <img src="{{img.image.url}}" alt="" srcset="" style="width:14rem ; height:9rem;" class="my-1">
+
+    {% endfor %}
+   </div>
+   
+
+
+</div>
+
+{% endblock %}
