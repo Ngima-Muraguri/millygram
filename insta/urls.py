@@ -20,7 +20,7 @@ from django.urls import include, path, re_path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path(r'', include('stories.urls')),
+    path(r'', include('IG.urls')),
     re_path(r'^tinymce/', include('tinymce.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
 ]
