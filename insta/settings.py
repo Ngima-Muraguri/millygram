@@ -35,13 +35,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'IG',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'IG',
     'cloudinary',
     'bootstrap5',
     'fontawesome_5',
@@ -79,6 +79,10 @@ TEMPLATES = [
     },
 ]
 
+# LOGOUT_REDIRECT_URL = 'login/'
+LOGIN_REDIRECT_URL = '/login/'
+LOGIN_URL = '/login/'
+
 WSGI_APPLICATION = 'insta.wsgi.application'
 
 
@@ -88,7 +92,7 @@ WSGI_APPLICATION = 'insta.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'gram',
+        'NAME': 'posts',
         'USER':'moringa',
         'PASSWORD':'access'
     }
@@ -124,6 +128,11 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+# AUTHENTICATION_BACKENDS = (
+#     ('django.contrib.auth.backends.ModelBackend'),
+# )
+
 
 
 # Internationalization

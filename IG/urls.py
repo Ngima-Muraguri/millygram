@@ -10,23 +10,14 @@ from django_registration.backends.one_step.views import RegistrationView
 
 urlpatterns = [
     re_path(r'^$', views.index, name='index'),
-    path(r'home/', views.home, name='home'),
-    path(r'search/', views.search, name='search'),
-    path(r'image/<int:image_id>', views.single_image, name='image'),
-    path(r'post/', views.new_post, name='post'),
-    path(r'profile/', views.profile, name='profile'),
-    path(r'editprofile/', views.edit_profile, name='editprofile'),
-    path(r'comment/', views.comment, name='comment'),
-
-    path('accounts/', include('django_registration.backends.one_step.urls')),
-    path('accounts/', include('django.contrib.auth.urls')),
+    path('home/', views.home, name='home'),
+    path('search/', views.search, name='search'),
+    path('image/<int:image_id>', views.single_image, name='image'),
+    path('post/', views.new_post, name='post'),
+    path('profile/', views.profile, name='profile'),
+    path('editprofile/', views.edit_profile, name='editprofile'),
+    path('comment/', views.comment, name='comment'),
     
-    path('accounts/register/',
-        RegistrationView.as_view(success_url=reverse_lazy('home')),
-        name='django_registration_register'),
-
-    re_path(r'^logout/$', auth_views.LogoutView.as_view(), name='logout'), 
-    re_path(r'^login/$', LoginView.as_view(), {"next_page": '/'}),
 
 ]
 if settings.DEBUG:

@@ -12,7 +12,9 @@ django-bootstrap4==22.1
 django-crispy-forms==1.14.0
 django-emoji-picker==0.0.6
 django-fontawesome==1.0
+django-fontawesome-5==1.0.18
 django-registration==3.3
+django-registration-redux==2.10
 django-tinymce==3.4.0
 idna==3.3
 Pillow==9.1.1

@@ -1,31 +1,43 @@
-body{
-    background-color: #8134AF;
-}
-.flex{
-    display: flex;
-}
-#panel{
-    border-radius: 10px black;
-    padding:10px;
+.third{
+    background: url("/static/images/ui.jpg") 50% 0 no-repeat fixed;
+    color: white;
+    height: 670px;
+    padding: 100px 0 0 0;  
+    background-repeat: no-repeat; 
+    background-size: cover;
+    }
 
+/* .thid{
+    background: url("/static/images/hui.jpg") 50% 0 no-repeat fixed;
+    color: white;
+    height: 412px;
+    padding: 100px 0 0 0;  
+    background-repeat: no-repeat; 
+    background-size: 400px, 400px;
+    
+    } */
+.row{
+    margin-top: 123px;
 }
-#instaicons{
-    margin-left: 20px;
+h2{
+    color: orangered;
+    font-style: italic;
+    font-size: 42px;
+    font-weight: bold;
+    font-family: 'Inspiration', cursive;
+    text-shadow: 2px 2px 2px white;
 }
-#profile{
-    display: flex;
 
+
+.third a{
+    background-color: rgb(224, 230, 235);
+    color: black;
+    font-weight: bold;
 }
-.navbar{
-    background-color: #DD2A7B;
-}
-#posts{
-    margin-left: 10rem;
-    margin-bottom: 5px;
-}
-.pffollowes{
-    display:flex
-}
-.fa-user{
-    font-size: 40px;
+h3{
+    font-weight: bold;
+    font-size: 2.5em;
+    /* text-transform: uppercase */
+    text-overflow: ellipsis;
+    text-shadow: 2px 2px 2px orangered;
 }

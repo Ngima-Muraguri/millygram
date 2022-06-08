@@ -1,4 +1,4 @@
-{%extends "django_registration/base.html"%}
+{% extends "django_registration/base.html" %}
 {% load bootstrap5 %}
 {% load static %}
 {% block styles %}
@@ -26,6 +26,11 @@
                         {% bootstrap_form form %}
                         <div class="form-group">
                             <input type="submit" class="btn btn-primary btn-sm" value="Sign Up">
+                        </div>
+                        <div>
+                            <h2>Have an Account?</h2>
+                            <a class='btn btn-default' href="/accounts/login">Login</a>
+        
                         </div>
 
                         <input type="hidden" name="next" value="{{next}}">

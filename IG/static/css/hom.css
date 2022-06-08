@@ -1,0 +1,18 @@
+@media screen and (min-width: 480px) and (max-width: 767px) {
+    .card{
+        width: 2rem ;
+      }
+    img{
+          width: 2rem ;
+      }
+    .cont{
+          margin-left: 0px ;
+      }
+}
+
+
+small{
+
+  background-color: aqua;
+  margin-left: 210px;width: 52rem;
+ }

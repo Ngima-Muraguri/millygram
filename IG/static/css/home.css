@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Wet+Paint&display=swap');
+
+body {
+    background: #eeeeec;
+
+
+}
+#comment-box, #post {
+    border: none;
+    border-radius: 5px;
+}
+#post:hover{
+    background-color: deeppink;
+}
+.post{
+    width: 50%;
+    /* background-color: light; */
+    box-shadow: 4px 4px yellow;
+    border-radius: 44px;
+}
+h4{
+    text-align: center;
+    /* font-family: 'Inspiration', cursive; */
+    font-family: 'Rubik Wet Paint', cursive;
+}
+.button{
+    background-color: transparent;
+    border-radius: 4px;
+    border-color: #ceceaa;
+    margin-left: 43px;
+    margin-right:24px;
+}
+.photo{
+    margin-left: 43px;
+    margin-right:24px;
+}
+hr{
+    width:80% ;
+    margin-left:111px ;
+}
+.small{
+    background-color:red;
+    margin-left: 210px;
+    width: 52rem;
+   }
+
+/* @media screen and (min-width: 480px) and (max-width: 767px) {
+    .int{
+      margin: top 334px;
+    }
+    .cont{
+      margin-left: 0px;
+    }
+    .cont .main{
+      width: 100px;
+    }
+    .img{
+      width: 100px;
+    }
+} */
