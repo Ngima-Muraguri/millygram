@@ -30,7 +30,7 @@ clone the repository <br>
 create a virtual environment and activate it<br>
 navigate to project <br>
 pip3 install -r requirements.txt <br>
-psql CREATE DATABASE photos <br>
+psql CREATE DATABASE posts <br>
 python3.8 manage.py runserver <br>
 python manage.py migrate
 
