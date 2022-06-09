@@ -17,6 +17,12 @@ from django.contrib import admin
 from django.urls import include, path
 from django.contrib.auth import views as auth_views
 from IG import views
+from django_registration.backends.one_step.views import RegistrationView
+from django.contrib.auth.views import LoginView
+
+
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -24,6 +30,10 @@ urlpatterns = [
     path('', include('IG.urls')),
     path('accounts/', include('django_registration.backends.one_step.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
+    
 
     
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

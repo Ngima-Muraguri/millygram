@@ -1,11 +1,9 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
-from django.urls import path, re_path, include, reverse_lazy
+from django.urls import path, re_path, include
 from django.contrib.auth import views as auth_views
-from django.contrib.auth.views import LoginView
-from django_registration.backends.one_step.views import RegistrationView
-# from django.core.urlresolvers import reverse_lazy
+
 
 
 urlpatterns = [
@@ -17,8 +15,9 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('editprofile/', views.edit_profile, name='editprofile'),
     path('comment/', views.comment, name='comment'),
-    
+     
 
 ]
 if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
